@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}All venues{% endblock %}
+
+{% block content %}
+	<h2>Venues:</h2>Location not here ? <a href="/locations/add_venue/">Add</a>
+	<div class="marketing">
+	<div class="row-fluid">
+	{% for Venue in venue_list %}
+			<div class="span4">
+			<address>
+			  <h4><a href="/locations/{{Venue.id}}">{{ Venue.name}}</a></h4>
+<!-- 			  {% if venue.image %}
+				<p><img src="/media/{{enue.image}}" width=250/></p>
+				{% endif %} -->
+			  {{ Venue.street_address }}<br>
+			  {{ Venue.suburb }}, {{Venue.state}}, {{ Venue.country }}<br>
+			  <abbr title="Phone">Ph:</abbr> {{ Venue.phone_number}}
+			</address>
+		</div>
+	{% endfor %}
+</div>
+</div>
+{% endblock %}

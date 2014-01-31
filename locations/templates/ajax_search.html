@@ -1,0 +1,11 @@
+{% if v_list.count > 0 %}
+
+{% for venue in v_list %}
+    <li><a href="{{ venue.object.get_absolute_url }}">{{ venue.object.name }}</a></li>
+{% endfor %}
+
+{% else %}
+
+<li>None to show!</li>
+
+{% endif %}

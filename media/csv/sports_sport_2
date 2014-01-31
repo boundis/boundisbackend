@@ -1,0 +1,12 @@
+name,min_participants,max_participants,category_id,commonly_played_on_a_id
+Basketball,2,10,1,3
+Tennis,2,4,3,3
+Squash,2,4,3,3
+Netball,0,0,1,3
+Cricket,0,0,2,1
+"Australia rules football",0,0,1,1
+"Rugby League",0,0,1,1
+"Mountain biking",0,0,6,7
+"Road biking",0,0,6,7
+"Football / soccer",0,0,1,1
+Golf,"","",5,5

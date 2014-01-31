@@ -1,0 +1,130 @@
+{% extends "facilitypagev1.html" %}
+
+{% block title %}{{ Venue.name }}{% endblock %}
+
+{% block content %}
+<h1>{{ Venue.name }}</h1>
+{% if pic_list|length > 0 %}
+<img class="img-responsive" src="/media/{{firstpic.image}}">
+{% else %}
+<img class="img-responsive" src="/media/venue/venueplaceholder.png">
+{% endif %}
+<!-- The Gallery as lightbox dialog, should be a child element of the document body -->
+{% for Venuepic in pic_list %}
+<a href="/media/{{Venuepic.image}}" data-lightbox="roadtrip"><img class="img-thumbnail" src="/media/{{Venuepic.image}}" style="max-width:100px; max-height:100px;"></a>
+{% endfor %}
+
+<h3>About {{Venue.name}}</h3>
+<p>{{Venue.summary}}</p>
+<div>
+  <p>Facility not here?</p><a href="/locations/add_facility/{{Venue.id}}"> Add a new facility now</a>
+</div>
+
+<div class="col-md-4 col-md-offset-2">
+  <div class="facilities-button">
+    <button type="button" class="btn btn-default btn-lg">
+      <span class="glyphicon glyphicon-plus"></span> Add to Favourites
+    </button>
+  </div>
+  <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Address
+
+    </div>
+
+    <!-- Table -->
+    <table class="table">
+      <tr>
+        <td><a href="/locations/edit_venue/{{Venue.id}}">Edit</a></td>
+      </tr>
+      <tr>
+       <td>Street Address</td>
+       <td>{{Venue.street_address}}, {{Venue.suburb}}, {{Venue.state}}</td>
+     </tr>
+   </table>
+   <div class="panel-heading">Contact details
+
+   </div>
+
+   <!-- Table -->
+   <table class="table">
+    <tr>
+      <td><a href="/locations/edit_venue/{{Venue.id}}">Edit</a></td>
+    </tr>
+    <tr>
+     <td>Phone</td>
+     <td>{{Venue.phone_number}}</td>
+   </tr>
+   <tr>
+     <td>Email</td>
+     <td><a href="mailto: {{Venue.email}}">{{Venue.email}}</a></td>
+   </tr>
+   <tr>
+     <td>Web</td>
+     <td><a href="{{Venue.website}}">{{Venue.website}}</a></td>
+   </tr>
+ </table>
+ <div class="panel-heading">Features</div>
+
+ <!-- Table -->
+ <table class="table">
+  <tr>
+    <td><a href="/locations/edit_venue/{{Venue.id}}">Edit</a></td>
+  </tr>
+  <tr>
+   <td>Toilets</td>
+   <td>{{Venue.public_toilets|capfirst}}</td>
+ </tr>
+ <tr>
+   <td>Changerooms</td>
+   <td>{{Venue.change_rooms|capfirst}}</td>
+ </tr>
+ <tr>
+   <td>Onsite Parking</td>
+   <td>{{Venue.onsite_parking|capfirst}}</td>
+ </tr>
+</table>
+<div class="panel-heading">Opening Hours</div>
+<table class="table">
+  <th>Day</th>
+  <th>Hours</th>
+  <tr>
+   <td>Monday</td>
+   <td>6:00am - 10:00pm</td>
+ </tr>
+ <tr>
+   <td>Tuesday</td>
+   <td>6:00am - 10:00pm</td>
+ </tr>
+ <tr>
+   <td>Wednesday</td>
+   <td>6:00am - 10:00pm</td>
+ </tr>
+ <tr>
+   <td>Thursday</td>
+   <td>6:00am - 10:00pm</td>
+ </tr>
+ <tr>
+   <td>Friday</td>
+   <td>6:00am - 10:00pm</td>
+ </tr>
+ <tr>
+   <td>Saturday</td>
+   <td>7:00am - 8:00pm</td>
+ </tr>
+ <tr>
+   <td>Sunday</td>
+   <td>7:00am - 8:00pm</td>
+ </tr>
+ <tr>
+   <td>Public Holidays</td>
+   <td>7:00am - 8:00pm</td>
+ </tr>
+</table>
+</div>
+
+</div>
+</div>
+
+{% endblock %}
+

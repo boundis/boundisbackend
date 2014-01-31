@@ -1,0 +1,224 @@
+{% extends "facilitypage.html" %}
+
+{% block title %}{{ Venue.name }}{% endblock %}
+
+{% block content %}
+<div class="row">
+      <div class="col-md-6">
+        <!--img data-src="holder.js/200x200" id="profilepic" class="main-info" alt="A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old instant camera"-->
+        <h1>{{Venue.name}}</h1>
+      	{% if pic_list|length > 0 %}
+			<img class="img-responsive" src="/media/{{firstpic.image}}">
+		{% else %}
+			<img class="img-responsive" src="/media/venue/venueplaceholder.png">
+		{% endif %}
+        <!-- The Gallery as lightbox dialog, should be a child element of the document body -->
+    	{% for Venuepic in pic_list %}
+			<a href="/media/{{Venuepic.image}}" data-lightbox="roadtrip"><img class="img-thumbnail" src="/media/{{Venuepic.image}}" style="max-width:100px; max-height:100px;"></a>
+		{% endfor %}
+    <a href="add_v_photos/{{Venue.id}}">Add photos</a>
+
+        <h3>About {{Venue.name}}</h3>
+        {% if Venue.summary %}
+        <p>{{Venue.summary}}</p>
+        {% endif %}
+        {% if facility_list|length > 0 %}
+          <ul class="nav nav-tabs" id="tabs">
+          	{% for Facility in facility_list %}
+            <li><a href="#{{Facility.id}}" data-toggle="tab">{{Facility.sports}}</a></li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        <div class="tab-content">
+        	{% for Facility in facility_list %}
+            <div id="{{Facility.id}}" class="tab-pane">
+
+              <div class="panel panel-default">
+                <!-- Default panel contents -->
+            {% for Facilitypic in facility_piclist %}
+            {% if Facilitypic.facility.id = Facility.id %}
+			<a href="/media/{{Facilitypic.image}}" data-lightbox="roadtrip"><img class="img-thumbnail" src="/media/{{Facilitypic.image}}" style="max-width:100px; max-height:100px;"></a>
+      {% endif %}
+			{% endfor %}
+      <a href="/locations/add_f_photos/{{Facility.id}}">Add photos</a>
+                <table class="table">
+                  <tr>
+        				<td><a href="/locations/edit_facility/{{Facility.id}}">Edit</a></td>
+      			</tr>
+                  <tr>
+                   <td>No. of {{Facility.facility_type}}s</td>
+                   <td>{{Facility.number_of_these_facilities}}</td>
+                 </tr>
+                  <tr>
+                   <td>{{Facility.facility_type}} Surface</td>
+                   <td>{{Facility.surface|capfirst}}</td>
+                 </tr>
+                  <tr>
+                    <td>Fees</td>
+                    {% if Facility.cost = 0 %}
+                    <td>Free</td>
+                    {% else %}
+                    <td>${{Facility.cost}}</td>
+                    {% endif %}
+                  </tr>
+                  <tr>
+                   <td>Need Membership</td>
+                   <td>{{Facility.members_only|capfirst}}</td>
+                 </tr>
+                 <tr>
+                  <td>Booking Essential</td>
+                  <td>{{Facility.bookings_required|capfirst}}</td>
+                </tr>
+                 <tr>
+                  <td>Indoor or Outdoor</td>
+                  <td>{{Facility.indoor_or_outdoor|capfirst}}</td>
+              </tr>
+                 <tr>
+                  <td>Lighting</td>
+                  <td>{{Facility.lighting_at_night|capfirst}}</td>
+              </tr>
+              </table>
+            </div>
+          </div>
+          {% endfor %}
+          <p><a href="/locations/add_facility/{{Venue.id}}">Add a facility</a></p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="facilities-button">
+          <button type="button" class="btn btn-default btn-lg">
+            <span class="glyphicon glyphicon-plus"></span> Add to Favourites
+          </button>
+        </div>
+        <div class="panel panel-default">
+          <!-- Default panel contents -->
+          <div class="panel-heading">Address</div>
+	        <p><a href="/locations/edit_venue/{{Venue.id}}">Edit</a></p>
+	       <p>{{Venue.street_address}}</p>
+	       <p>{{Venue.suburb}}</p>
+	       <p>{{Venue.state}}</p>
+       </div>
+       <div class="panel panel-default">
+          <!-- Default panel contents -->
+          <div class="panel-heading">Contact details</div>
+
+          <!-- Table -->
+          <table class="table">
+           <tr>
+             <td>Phone</td>
+             <td>{{Venue.phone_number}}</td>
+           </tr>
+           <tr>
+             <td>Email</td>
+             <td><a href="mailto:{{Venue.email}}">{{Venue.email}}</a></td>
+           </tr>
+           <tr>
+             <td>Web</td>
+             <td><a href="{{Venue.website}}">{{Venue.website}}</a></td>
+           </tr>
+         </table>
+       </div>
+       <div class="panel panel-default">
+          <!-- Default panel contents -->
+          <div class="panel-heading">Facilities</div>
+
+          <!-- Table -->
+          <table class="table">
+           <tr>
+             <td>Change Rooms</td>
+             <td>{{Venue.change_rooms|capfirst}}</td>
+           </tr>
+           <tr>
+             <td>Toilets</td>
+             <td>{{Venue.public_toilets|capfirst}}</td>
+           </tr>
+           <tr>
+             <td>Onsite Parking</td>
+             <td>{{Venue.onsite_parking|capfirst}}</td>
+           </tr>
+         </table>
+       </div>
+       <div class="panel panel-default">
+          <!-- Default panel contents -->
+          <div class="panel-heading">Opening Hours</div>
+
+          <!-- Table -->
+          <table class="table">
+          	<th>Day</th>
+          	<th>Hours</th>
+          	<tr>
+          		<td>Monday</td>
+          		{% if Venue.monday_is_closed %}
+          		<td>Closed</td>
+          		{% else %}
+          		{% if Venue.monday_op %}
+          		<td>{{Venue.monday_op}} - {{Venue.monday_cl}}</td>
+          		{% endif %}
+          		{% endif %}
+          	</tr>
+          	<tr>
+          		<td>Tuesday</td>
+          		{% if Venue.tuesday_is_closed %}
+          		<td>Closed</td>
+          		{% else %}
+          		{% if Venue.tuesday_op %}
+          		<td>{{Venue.tuesday_op}} - {{Venue.tuesday_cl}}</td>
+          		{% endif %}
+          		{% endif %}
+          	</tr>
+          	<tr>
+          		<td>Wednesday</td>
+          		{% if Venue.wednesday_is_closed %}
+          		<td>Closed</td>
+          		{% else %}
+          		{% if Venue.wednesday_op %}
+          		<td>{{Venue.wednesday_op}} - {{Venue.wednesday_cl}}</td>
+          		{% endif %}
+          		{% endif %}
+          	</tr>
+          	<tr>
+          		<td>Thursday</td>
+          		{% if Venue.thursday_is_closed %}
+          		<td>Closed</td>
+          		{% else %}
+          		{% if Venue.thursday_op %}
+          		<td>{{Venue.thursday_op}} - {{Venue.thursday_cl}}</td>
+          		{% endif %}
+          		{% endif %}
+          	</tr>
+          	<tr>
+          		<td>Friday</td>
+          		{% if Venue.friday_is_closed %}
+          		<td>Closed</td>
+          		{% else %}
+          		{% if Venue.friday_op %}
+          		<td>{{Venue.friday_op}} - {{Venue.friday_cl}}</td>
+          		{% endif %}
+          		{% endif %}
+          	</tr>
+          	<tr>
+          		<td>Saturday</td>
+          		{% if Venue.saturday_is_closed %}
+          		<td>Closed</td>
+          		{% else %}
+          		{% if Venue.saturday_op %}
+          		<td>{{Venue.saturday_op}} - {{Venue.saturday_cl}}</td>
+          		{% endif %}
+          		{% endif %}
+          	</tr>
+          	<tr>
+          		<td>Sunday</td>
+          		{% if Venue.sunday_is_closed %}
+          		<td>Closed</td>
+          		{% else %}
+          		{% if Venue.sunday_op %}
+          		<td>{{Venue.sunday_op}} - {{Venue.sunday_cl}}</td>
+          		{% endif %}
+          		{% endif %}
+          	</tr>
+          </table>
+       </div>
+     </div>
+{% endblock %}

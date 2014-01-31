@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Find a venue{% endblock %}
+
+{% block content %}
+    {% if error %}
+        <p style="color: red;">Please provide a suburb or postcode.</p>
+    {% endif %}
+<h3>Find sports in your area</h3>
+{% csrf_token %}
+<div class="marketing">
+<form action="" method="get">
+    <input class="span2" type="text" name='sport' placeholder='Sport'>
+    <input class="span3" type="text" name='suburb' placeholder='Suburb or postcode'>
+    <label><input type="checkbox" name='surrounding'> Include surrounding suburbs</label>
+    <input class="btn btn-medium btn-primary span5" type="submit" value="Get Bounding!">
+</form>	
+</div>
+{% endblock %}
+
+<label><input type="checkbox" name="checkbox" value="value"> Text</label>

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Search results{% endblock %}
+
+{% block content %}
+{% if venue_list %}
+	<p>{{ venue_list | length }} {{ sports }} venues found containing the search term "{{ query }}"</p>
+	<div class="marketing">
+	<div class="row-fluid">
+		{% for Venue in venue_list %}
+			<div class="span4">
+			<address>
+			  <h4><a href="/locations/{{Venue.id}}">{{ Venue.name}}</a></h4>
+			  {% if venue.image %}
+				<p><img src="/media/{{Venue.image}}" width=250/></p>
+				{% endif %}
+			  {{ Venue.street_address }}<br>
+			  {{ Venue.suburb }}, {{Venue.state}}, {{ Venue.country }}<br>
+			  <abbr title="Phone">Ph:</abbr> {{ Venue.phone_number}}
+			</address>
+		</div>
+		{% endfor %}
+	</div>
+	</div>
+{% else %}
+	<p>No venues matched your search criteria. <a href="/locations/">Try another search.</a></p>
+{% endif %}
+{% endblock %}

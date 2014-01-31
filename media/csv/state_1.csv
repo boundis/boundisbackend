@@ -1,0 +1,77 @@
+state,abbreviation,country_id
+Alabama,AL,185
+Alaska,AK,185
+Arizona,AZ,185
+Arkansas,AR,185
+California,CA,185
+Colorado,CO,185
+Connecticut,CT,185
+Delaware,DE,185
+Florida,FL,185
+Georgia,GA,185
+Hawaii,HI,185
+Idaho,ID,185
+Illinois,IL,185
+Indiana,IN,185
+Iowa,IA,185
+Kansas,KS,185
+Kentucky,KY,185
+Louisiana,LA,185
+Maine,ME,185
+Maryland,MD,185
+Massachusetts,MA,185
+Michigan,MI,185
+Minnesota,MN,185
+Mississippi,MS,185
+Missouri,MO,185
+Montana,MT,185
+Nebraska,NE,185
+Nevada,NV,185
+"New Hampshire",NH,185
+"New Jersey",NJ,185
+"New Mexico",NM,185
+"New York",NY,185
+"North Carolina",NC,185
+"North Dakota",ND,185
+Ohio,OH,185
+Oklahoma,OK,185
+Oregon,OR,185
+Pennsylvania,PA,185
+"Rhode Island",RI,185
+"South Carolina",SC,185
+"South Dakota",SD,185
+Tennessee,TN,185
+Texas,TX,185
+Utah,UT,185
+Vermont,VT,185
+Virginia,VA,185
+Washington,WA,185
+"West Virginia",WV,185
+Wisconsin,WI,185
+Wyoming,WY,185
+"Puerto Rico",PR,185
+"U.S. Virgin Islands",VI,185
+"American Samoa",AS,185
+Guam,GU,185
+"Northern Mariana Islands",MP,185
+Alberta,AB,32
+"British Columbia",BC,32
+Manitoba,MB,32
+"New Brunswick",NB,32
+"Newfoundland and Labrador",NL,32
+"Nova Scotia",NS,32
+Ontario,ON,32
+"Prince Edward Island",PE,32
+Quebec,QC,32
+Saskatchewan,SK,32
+"Northwest Territories",NT,32
+Nunavut,NU,32
+"Yukon Territory",YT,32
+"Australian Capital Territory",ACT,9
+"New South Wales",NSW,9
+"Northern Territory",NT,9
+Queensland,QLD,9
+"South Australia",SA,9
+Tasmania,TAS,9
+Victoria,VIC,9
+"Western Australia",WA,9
