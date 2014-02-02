@@ -1,4 +1,4 @@
-{% extends "facilitypage.html" %}
+{% extends "facilitypagev1.html" %}
 
 {% block title %}{{ Venue.name }}{% endblock %}
 
@@ -8,13 +8,13 @@
         <!--img data-src="holder.js/200x200" id="profilepic" class="main-info" alt="A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old instant camera"-->
         <h1>{{Venue.name}}</h1>
       	{% if pic_list|length > 0 %}
-			<img class="img-responsive" src="/media/{{firstpic.image}}">
+			<a href="/media/{{firstpic.image}}" data-lightbox="roadtrip"><img class="img-responsive" src="/media/{{firstpic.image}} ">
 		{% else %}
 			<img class="img-responsive" src="/media/venue/venueplaceholder.png">
 		{% endif %}
         <!-- The Gallery as lightbox dialog, should be a child element of the document body -->
     	{% for Venuepic in pic_list %}
-			<a href="/media/{{Venuepic.image}}" data-lightbox="roadtrip"><img class="img-thumbnail" src="/media/{{Venuepic.image}}" style="max-width:100px; max-height:100px;"></a>
+			<a href="/media/{{Venuepic.image}}" data-lightbox="roadtrip"><img class="img-thumbnail" src="/media/{{Venuepic.image}}" style="max-width:100px; max-height:100px;min-width:50px; min-height:50px;"></a>
 		{% endfor %}
     <a href="add_v_photos/{{Venue.id}}">Add photos</a>
 
@@ -38,7 +38,7 @@
                 <!-- Default panel contents -->
             {% for Facilitypic in facility_piclist %}
             {% if Facilitypic.facility.id = Facility.id %}
-			<a href="/media/{{Facilitypic.image}}" data-lightbox="roadtrip"><img class="img-thumbnail" src="/media/{{Facilitypic.image}}" style="max-width:100px; max-height:100px;"></a>
+			<a href="/media/{{Facilitypic.image}}" data-lightbox="roadtrip"><img class="img-thumbnail" src="/media/{{Facilitypic.image}}" style="max-width:100px; max-height:100px;min-width:50px; min-height:50px;"></a>
       {% endif %}
 			{% endfor %}
       <a href="/locations/add_f_photos/{{Facility.id}}">Add photos</a>
@@ -86,7 +86,7 @@
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="facilities-button">
           <button type="button" class="btn btn-default btn-lg">
             <span class="glyphicon glyphicon-plus"></span> Add to Favourites
@@ -94,11 +94,13 @@
         </div>
         <div class="panel panel-default">
           <!-- Default panel contents -->
-          <div class="panel-heading">Address</div>
+          <div class="panel-heading" >Address</div>
+          <div style="margin-left:10px">
 	        <p><a href="/locations/edit_venue/{{Venue.id}}">Edit</a></p>
 	       <p>{{Venue.street_address}}</p>
 	       <p>{{Venue.suburb}}</p>
 	       <p>{{Venue.state}}</p>
+       </div>
        </div>
        <div class="panel panel-default">
           <!-- Default panel contents -->

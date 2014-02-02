@@ -1,27 +1,25 @@
-{% extends "base.html" %}
+{% extends "facilitypagev1.html" %}
 
 {% block title %}Search results{% endblock %}
 
 {% block content %}
 {% if venue_list %}
-	<p>{{ venue_list | length }} {{ sports }} venues found containing the search term "{{ query }}"</p>
-	<div class="marketing">
-	<div class="row-fluid">
-		{% for Venue in venue_list %}
-			<div class="span4">
-			<address>
-			  <h4><a href="/locations/{{Venue.id}}">{{ Venue.name}}</a></h4>
-			  {% if venue.image %}
-				<p><img src="/media/{{Venue.image}}" width=250/></p>
-				{% endif %}
-			  {{ Venue.street_address }}<br>
-			  {{ Venue.suburb }}, {{Venue.state}}, {{ Venue.country }}<br>
-			  <abbr title="Phone">Ph:</abbr> {{ Venue.phone_number}}
-			</address>
-		</div>
-		{% endfor %}
-	</div>
-	</div>
+	<div class="row">
+        <div class="col-md-12">
+        	{% for Venue in venue_list %}
+            <div class="col-sm-4">
+                <div class="thumbnail" style="background-color:lightgrey; height: 100%"><img src="media/{{Venuepic.image}}" style="padding-top:30px;">
+                    <div class="caption">
+                        <h4 class="results">{{Venue.name}}</h4>
+                        <p class="results">{{Venue.summary}}</p>
+                        <p class="results"><a href="target" style="color:white;">Link to results</a></p>
+                        <p class="results"><a href="target" style="color:white;">Link to results</a></p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
 {% else %}
 	<p>No venues matched your search criteria. <a href="/locations/">Try another search.</a></p>
 {% endif %}

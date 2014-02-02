@@ -132,7 +132,10 @@ def search(request):
                 b=post_code
             queryset = models.Venue.objects.filter(Q(facility__sports__name__icontains=sport), Q(suburb__post_code__range=(a, b)))
             venue_list = queryset.order_by('name').distinct()
-            return render(request, 'search_results.html',{'query':suburb, 'venue_list':venue_list} )
+            venue_piclist = []
+            for Venue in venue_list:
+                venue_piclist.extend(list(models.Venuepic.objects.filter(venue=Venue.id)))
+            return render(request, 'search_results.html',{'query':suburb, 'venue_list':venue_list, 'venue_piclist':venue_piclist} )
     else:
         return render(request, 'search.html', {'error': error})
 
