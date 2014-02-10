@@ -47,14 +47,13 @@
           {% if user.is_authenticated %}
               <ul class= "nav navbar-nav pull-right">
                 <li class= ""><a>{{ user.username }}</a></li>
-                <li><a href="/teams/logout">[logout]</a></li>
+                <li><a href="/teams/logout">Logout</a></li>
               </ul>
         {% else %}
-          <form class="navbar-form pull-right">
-            <input class="span2" type="text" placeholder="Email">
-            <input class="span2" type="password" placeholder="Password">
-            <button type="submit" class="btn">Sign in</button>
-          </form>
+        <ul class= "nav navbar-nav pull-right">
+          <li><a class="btn btn-sm btn-primary" href="/teams/login" role="button">Sign in</a></li>
+          <li><a class="btn btn-sm btn-primary" href="/myprofile/add" role="button">Sign up today</a></li>
+        </ul>
         {% endif %}
 
         </div>
@@ -83,7 +82,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== --> 
     <!-- Placed at the end of the document so the pages load faster --> 
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="/assets/js/jquery.js"></script>
     <script src="/assets/js/bootstrap1.min.js"></script>
     <script src="/assets/js/lightbox-2.6.min.js"></script>
     <script type="text/javascript">

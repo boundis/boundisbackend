@@ -12,7 +12,7 @@ def add_user(request):
         if form.is_valid():
             form.save()
             form = models.user_form(request.POST)
-            return HttpResponseRedirect('/myprofile/profile/')
+            return HttpResponseRedirect('/teams/login')
     return render(request, 'add_user.html', {'form': form })
 
 @login_required
