@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Pending Approvals:</h2>
+<table cellpadding="10">
+<tr>
+<th>Name</th>
+<th>Address</th>
+<th>City</th>
+</tr>
+{% for location in approvals_list %}
+	<tr>
+	<td>{{location.name}}</td>
+	<td>{{location.address}}</td>
+	<td>{{location.city}}</td>
+	<td><a href="{{ location.get_absolute_url}}/finder/add_location/approvals/approve/{{location.id}}">Approve</a></td>
+	</tr>
+{% endfor %}
+</table>
+{% endblock %}

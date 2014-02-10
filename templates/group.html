@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Teams{% endblock %}
+
+{% block content %}
+<h2>My Teams:</h2>
+
+{% for group in team_list %}
+    <p>{{ group.group_name }}</p> 
+{% endfor %}
+
+<h2>My Memberships</h2>
+{% for membership in membership_list %}
+    <p>{{ membership.group.group_name }} <b>added on {{ membership.date_joined }}</b></p>
+{% endfor %}
+{% endblock %}

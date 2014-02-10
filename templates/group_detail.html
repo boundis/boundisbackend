@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}{{group.group_name}}{% endblock %}
+
+{% block content %}
+<br>
+<table cellpadding="10">
+<tr><td><u>Name: </u></td><td>{{group.group_name}}</td></tr>
+<tr><td><u>Type: </u></td><td>{{group.group_type}}</td></tr>
+</table>
+<p>Current Members: </p>
+{% for member in group.members.all %}
+{{ member.user.username }}, 
+{% endfor %}
+{% if form.errors %}
+    <p style="color: red;">
+        Please correct the error{{ form.errors|pluralize }} below.
+    </p>
+{% endif %}
+
+<form action="" method="post">
+    <table>
+        {{ form.as_table }}
+    </table>
+    {% csrf_token %}
+    <input type="submit" value="Submit">
+</form>	
+{% endblock %}

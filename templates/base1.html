@@ -47,6 +47,7 @@
           {% if user.is_authenticated %}
               <ul class= "nav navbar-nav pull-right">
                 <li class= ""><a>{{ user.username }}</a></li>
+                <li><a href="/teams/logout">[logout]</a></li>
               </ul>
         {% else %}
           <form class="navbar-form pull-right">
