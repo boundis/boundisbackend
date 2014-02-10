@@ -1,14 +1,20 @@
-{% extends "base.html" %}
+{% extends "base2.html" %}
 
 {% block title %}Add Facility{% endblock %}
 
-{% block content %}
+{% block results %}
 <h3>Add a Facility to {{ venue.name }}</h3>
 
+
 {% if form.errors %}
-    <p style="color: red;">
-        Please correct the error{{ form.errors|pluralize }} below.
-    </p>
+    <div class="alert alert-error">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        {% for field in form %} 
+            {% if field.errors %}
+            <li>{{ field.label }}: {{ field.errors|striptags }}</li>
+            {% endif %}
+        {% endfor %}
+    </div>
 {% endif %}
 
 <form action="" method="post" enctype="multipart/form-data">

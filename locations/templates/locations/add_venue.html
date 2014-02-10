@@ -1,8 +1,8 @@
-{% extends "base.html" %}
+{% extends "base2.html" %}
 
 {% block title %}Add Venue{% endblock %}
 
-{% block content %}
+{% block results %}
 <h3>Add a Venue</h3>
 
 {% if form.errors %}
@@ -21,6 +21,6 @@
         {{ form.as_table }}
         {{ formpic.as_table}}
     </table>
-    <input class="btn btn-large btn-primary" type="submit" value="Save and add a sports facility">
+    <input class="btn btn-large btn-primary" type="submit" value="Save">
 </form>	
 {% endblock %}

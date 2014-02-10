@@ -1,8 +1,8 @@
-{% extends "base.html" %}
+{% extends "base1.html" %}
 
 {% block title %}Find a venue{% endblock %}
 
-{% block content %}
+{% block leftcolumn %}
     {% if error %}
         <p style="color: red;">Please provide a suburb or postcode.</p>
     {% endif %}
@@ -17,5 +17,3 @@
 </form>	
 </div>
 {% endblock %}
-
-<label><input type="checkbox" name="checkbox" value="value"> Text</label>

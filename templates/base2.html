@@ -7,7 +7,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
-<title>Facility Name</title>
+<title>Search Results</title>
 <!-- Bootstrap core CSS -->
   <link href="/assets/css/bootstrap1.css" rel="stylesheet">
   <link href="/assets/css/lightbox.css" rel="stylesheet">
@@ -23,11 +23,12 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 <style>
-.facilities-button {
-	margin-top: 60px;
+.results {
+	text-align: center;
+	color: white;
 }
 .row {
-    padding-top: 30px;
+	padding-top: 30px;
 }
 </style>
 </head>
@@ -39,49 +40,65 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
             <a class="navbar-brand" href="#">Boundis</a> </div>
         <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-              <li class="active">
-                <a href="/locations/search">Home</a>
-              </li>
-              <li class="">
-                <a href="/locations/search">Search</a>
-              </li>
-              <li class="">
-                <a href="/locations/all_venues">All Venues</a>
-              </li>              
-              <li class="">
-                <a href="/locations/add_venue/">Add Venue</a>
-              </li>
-              <li class="">
-                <a href="#">Contact Us</a>
-              </li>
-            </ul>
+          <ul class="nav navbar-nav">
+            <li class="active">
+              <a href="/locations/search">Home</a>
+            </li>
+            <li class="">
+              <a href="/locations/search">Search</a>
+            </li>
+            <li class="">
+              <a href="/locations/all_venues">All Venues</a>
+            </li>              
+            <li class="">
+              <a href="/locations/add_venue/">Add Venue</a>
+            </li>
+            <li class="">
+              <a href="#">Contact Us</a>
+            </li>
+          </ul>
+          {% if user.is_authenticated %}
+              <ul class= "nav navbar-nav pull-right">
+                <li class= ""><a>{{ user.username }}</a></li>
+              </ul>
+        {% else %}
+          <form class="navbar-form pull-right">
+            <input class="span2" type="text" placeholder="Email">
+            <input class="span2" type="password" placeholder="Password">
+            <button type="submit" class="btn">Sign in</button>
+          </form>
+        {% endif %}
+
         </div>
         <!--/.nav-collapse --> 
     </div>
 </div>
 <!-- /.container -->
 <div class="container">
-    {% block content %}{% endblock %}
-        <div class="col-md-2 hidden-xs">
+    <div class="row">
+        <div class="col-md-9">
+            {% block results %}{% endblock %}
+        </div>
+        <div class="col-md-3 hidden-xs">
             <h3>Advertisments</h3>
             <img class="img-responsive" src="img/img1.jpg" style="max-width:200px; max-height:200px;">
-            <p>Some blurb</p>
+            <h4>Some blurb</h4>
             <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odi</p>
         </div>
     </div>
-    
-    <!-- Bootstrap core JavaScript
+</div>
+
+<!-- Bootstrap core JavaScript
     ================================================== --> 
-    <!-- Placed at the end of the document so the pages load faster --> 
+<!-- Placed at the end of the document so the pages load faster --> 
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="/assets/js/bootstrap1.min.js"></script>
     <script src="/assets/js/lightbox-2.6.min.js"></script>
     <script type="text/javascript">
-	$(function() {
-		$('#tabs a:first').tab('show');
-	});
-	</script> 
-</div>
+    $(function() {
+      $('#tabs a:first').tab('show');
+    });
+    </script> 
+  </div>
 </body>
 </html>

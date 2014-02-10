@@ -4,13 +4,17 @@ from django.core.urlresolvers import reverse
 from locations import models, forms
 from django.core.context_processors import csrf
 from django.db.models import Q
-from django.forms.formsets import formset_factory
 from sports.models import Sport, Facility_type
 
 def allvenues(request):		
     venue_list = models.Venue.objects.order_by('name')
-    context = {'venue_list': venue_list,}
-    return render(request, 'all_venues.html', context)
+    venue_piclist = []
+    facility_list = []
+    for Venue in venue_list:
+        venue_piclist.extend(list(models.Venuepic.objects.filter(venue=Venue.id)))
+        facility_list.extend(list(models.Facility.objects.filter(venue=Venue.id)))
+    context = {'venue_list': venue_list, 'facility_list' : facility_list, 'venue_piclist':venue_piclist,}
+    return render(request, 'locations/search_results.html', context)
 
 def venue_detail(request, venue_id):
     Venue = models.Venue.objects.get(pk=venue_id)
@@ -24,7 +28,7 @@ def venue_detail(request, venue_id):
     for Facility in facility_list:
         facility_piclist.extend(list(models.Facilitypic.objects.filter(facility=Facility.id)))
     context = {'Venue': Venue, 'facility_list' : facility_list, 'pic_list':pic_list, 'firstpic':firstpic, 'facility_piclist':facility_piclist}
-    return render(request, 'venue_detail.html', context)
+    return render(request, 'locations/venue_detail.html', context)
 
 def add_venue(request):
     form = forms.venue_form()
@@ -44,9 +48,9 @@ def add_venue(request):
 
         else:
             error = True
-            return render(request, 'add_venue.html', {'form': form, 'formpic':formpic, 'error':error})
+            return render(request, 'locations/add_venue.html', {'form': form, 'formpic':formpic, 'error':error})
     else:
-        return render(request, 'add_venue.html', {'form': form, 'formpic':formpic})
+        return render(request, 'locations/add_venue.html', {'form': form, 'formpic':formpic})
 
 
 
@@ -60,9 +64,9 @@ def edit_venue(request, venue_id):
             return HttpResponseRedirect('/locations/%i/' % venue.id)
         else:
             error=True
-            return render(request, 'edit_venue.html', {'form': form, 'error':error})
+            return render(request, 'locations/edit_venue.html', {'form': form, 'error':error})
     else:
-        return render(request, 'edit_venue.html', {'form': form })
+        return render(request, 'locations/edit_venue.html', {'form': form })
 
 def add_facility(request, venue_id):
     venue = models.Venue.objects.get(pk=venue_id)
@@ -83,9 +87,9 @@ def add_facility(request, venue_id):
             return HttpResponseRedirect('/locations/%i/' % instance.venue.id)
         else:
             error=True
-            return render(request, 'add_facility.html', {'form': form, 'venue' : venue, 'error':error, 'formpic':formpic})
+            return render(request, 'locations/add_venue.html', {'form': form, 'venue' : venue, 'error':error, 'formpic':formpic})
     else:
-        return render(request, 'add_facility.html', {'form': form, 'venue' : venue, 'formpic':formpic})
+        return render(request, 'locations/add_venue.html', {'form': form, 'venue' : venue, 'formpic':formpic})
 
 def edit_facility(request, facility_id):
     facility = models.Facility.objects.get(pk=facility_id)
@@ -98,9 +102,9 @@ def edit_facility(request, facility_id):
             return HttpResponseRedirect('/locations/%i/' % facility.venue.id)
         else:
             error=True
-            return render(request, 'edit_facility.html', {'form': form, 'facility':facility, 'error':error})
+            return render(request, 'locations/edit_facility.html', {'form': form, 'facility':facility, 'error':error})
     else:
-        return render(request, 'edit_facility.html', {'form': form, 'facility':facility})
+        return render(request, 'locations/edit_facility.html', {'form': form, 'facility':facility})
 
 
 def search(request):
@@ -110,7 +114,7 @@ def search(request):
         sport = request.GET['sport']
         if not suburb:
             error = True
-            return render(request, 'search.html', {'error': error})
+            return render(request, 'locations/search.html', {'error': error})
         else:
             try:
                 suburb = int(suburb)
@@ -123,7 +127,7 @@ def search(request):
                 except:
                     ValueError
                     locations = []
-                    return render(request, 'search_results.html',{'query':suburb, 'locations':locations} )
+                    return render(request, 'locations/search_results.html',{'query':suburb, 'locations':locations} )
             if 'surrounding' in request.GET:
                 a=post_code-15
                 b=post_code+15
@@ -135,9 +139,9 @@ def search(request):
             venue_piclist = []
             for Venue in venue_list:
                 venue_piclist.extend(list(models.Venuepic.objects.filter(venue=Venue.id)))
-            return render(request, 'search_results.html',{'query':suburb, 'venue_list':venue_list, 'venue_piclist':venue_piclist} )
+            return render(request, 'locations/search_results.html',{'query':suburb, 'venue_list':venue_list, 'venue_piclist':venue_piclist} )
     else:
-        return render(request, 'search.html', {'error': error})
+        return render(request, 'locations/search.html', {'error': error})
 
 def add_venuepic(request, venue_id):
     venue = models.Venue.objects.get(pk=venue_id)
@@ -152,9 +156,9 @@ def add_venuepic(request, venue_id):
             return HttpResponseRedirect('/locations/%i/' %int(venue_id))
         else:
             form = forms.venuepic_form()
-            return render(request, 'add_photos.html', {'form': form, 'place':venue, 'current_pics':current_pics })
+            return render(request, 'locations/add_photos.html', {'form': form, 'place':venue, 'current_pics':current_pics })
     else:
-        return render(request, 'add_photos.html', {'form': form, 'place':venue, 'current_pics':current_pics})
+        return render(request, 'locations/add_photos.html', {'form': form, 'place':venue, 'current_pics':current_pics})
 
 def add_facilitypic(request, facility_id):
     facility = models.Facility.objects.get(pk=facility_id)
@@ -170,6 +174,6 @@ def add_facilitypic(request, facility_id):
             return HttpResponseRedirect('/locations/%i/' %facility.venue.id)
         else:
             form = forms.facilitypic_form()
-            return render(request, 'add_photos.html', {'form': form, 'place':facility, 'venue':venue, 'current_pics':current_pics})
+            return render(request, 'locations/add_photos.html', {'form': form, 'place':facility, 'venue':venue, 'current_pics':current_pics})
     else:
-        return render(request, 'add_photos.html', {'form': form, 'place':facility, 'venue':venue, 'current_pics':current_pics})
+        return render(request, 'locations/add_photos.html', {'form': form, 'place':facility, 'venue':venue, 'current_pics':current_pics})

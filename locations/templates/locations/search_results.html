@@ -1,0 +1,30 @@
+{% extends "base2.html" %}
+
+{% block title %}Search results{% endblock %}
+
+{% block results %}
+{% if venue_list %}
+        	{% for Venue in venue_list %}
+            <div class="col-sm-4">
+
+                <div class="thumbnail" style="background-color:lightgrey; height: 100%">
+
+                            <img class="img-thumbnail" src="/media/{{Venuepic.image}}" style="max-width:100px; max-height:100px;">
+
+                    <div class="caption">
+                        <h4 class="results"><a href="/locations/{{Venue.id}}">{{Venue.name}}</a></h4>
+                        <p class="results">{{Venue.summary}}</p>
+                        {% for Facility in facility_list %}
+                        {% if Facility.venue.id = Venue.id %}
+                        <li>{{Facility.sports}}</li>
+                        {% endif %}
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+{% else %}
+	<p>No venues matched your search criteria. <a href="/locations/">Try another search.</a></p>
+{% endif %}
+{% endblock %}

@@ -1,11 +1,9 @@
-{% extends "facilitypagev1.html" %}
+{% extends "base1.html" %}
 
 {% block title %}{{ Venue.name }}{% endblock %}
 
-{% block content %}
-<div class="row">
-      <div class="col-md-6">
-        <!--img data-src="holder.js/200x200" id="profilepic" class="main-info" alt="A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old instant camera"-->
+{% block leftcolumn %}
+
         <h1>{{Venue.name}}</h1>
       	{% if pic_list|length > 0 %}
 			<a href="/media/{{firstpic.image}}" data-lightbox="roadtrip"><img class="img-responsive" src="/media/{{firstpic.image}} ">
@@ -84,9 +82,10 @@
           {% endfor %}
           <p><a href="/locations/add_facility/{{Venue.id}}">Add a facility</a></p>
         </div>
-      </div>
+  {% endblock %}
 
-      <div class="col-md-4">
+
+      {% block rightcolumn %}
         <div class="facilities-button">
           <button type="button" class="btn btn-default btn-lg">
             <span class="glyphicon glyphicon-plus"></span> Add to Favourites
@@ -222,5 +221,4 @@
           	</tr>
           </table>
        </div>
-     </div>
-{% endblock %}
+{% endblock %}}

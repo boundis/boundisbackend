@@ -1,12 +1,10 @@
-{% extends "facilitypagev1.html" %}
+{% extends "base2.html" %}
 
-{% block title %}Search results{% endblock %}
+{% block title %}All venues{% endblock %}
 
-{% block content %}
+{% block results %}
 {% if venue_list %}
-	<div class="row">
-        <div class="col-md-12">
-        	{% for Venue in venue_list %}
+            {% for Venue in venue_list %}
             <div class="col-sm-4">
                 <div class="thumbnail" style="background-color:lightgrey; height: 100%"><img src="media/{{Venuepic.image}}" style="padding-top:30px;">
                     <div class="caption">
@@ -18,9 +16,7 @@
                 </div>
             </div>
         {% endfor %}
-        </div>
-    </div>
 {% else %}
-	<p>No venues matched your search criteria. <a href="/locations/">Try another search.</a></p>
+    <p>No venues matched your search criteria. <a href="/locations/">Try another search.</a></p>
 {% endif %}
 {% endblock %}
