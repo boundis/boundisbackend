@@ -8,16 +8,16 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 def add_user(request):
     form = models.user_form()
     if request.method == 'POST':
-        form = models.user_form(request.POST)
+        form = models.user_form(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            form = models.user_form(request.POST)
+            form = models.user_form(request.POST, request.FILES)
             return HttpResponseRedirect('/teams/login')
-    return render(request, 'add_user.html', {'form': form })
+    return render(request, 'user_profile/add_user.html', {'form': form })
 
 @login_required
 def user_profile(request):
     User = request.user
     #persons = Person.objects.filter(~Q(user=User))
     persons = Person.objects.get(user=User.id)
-    return render(request, 'profile.html', {'person_object': persons})
+    return render(request, 'user_profile/profile.html', {'person_object': persons})

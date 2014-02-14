@@ -3,7 +3,7 @@
 {% block title %}My Profile{% endblock %}
 
 {% block leftcolumn %}
-USER
+<h3>{{person_object.user.first_name}} {{person_object.user.last_name}}</h3>
 {{person_object.user.first_name}}
 
 {% endblock %}
