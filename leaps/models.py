@@ -2,6 +2,7 @@ from django.db import models
 from user_profile.models import Person
 from teams.models import Group
 from django import forms
+from django.contrib.auth.models import User
 
 class Leap(models.Model):
 	message = models.CharField(max_length=500)
@@ -15,4 +16,6 @@ class leap_form(forms.Form):
 		new_leap = Leap(message=self.cleaned_data['message'],author=user_obj,group=group_obj)
 		new_leap.save()
 		return new_leap
+
+
 	

@@ -6,7 +6,7 @@ from user_profile import models
 from teams import models
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
-
+from leaps.models import leap_form
 @login_required
 def listMembership(request):
 	if request.user.is_authenticated():
@@ -45,19 +45,27 @@ def group_detail(request, group_id):
     print auth
     if auth == True:
         form = models.add_member_form()
-        if request.method == 'POST':
+	form2 = leap_form()
+	if request.method == 'POST':
             form = models.add_member_form(request.POST)
+	    form2 = leap_form(request.POST)
             if form.is_valid():
 			    form.save(group)
 			    form = models.add_member_form()
-            else:
+	    else:
                 form = models.add_member_form()
-            return render(request, 'group_detail.html', {'group': group,'form':form})
-        else:
+            return render(request, 'group_detail.html', {'group': group,'form':form,'form2':form2})
+        else:	
              return render(request, 'group_detail.html', {'group': group,'form':form})			
     else:
          print "NOT AUTH"
-         return render(request, 'group_detail.html', {'group': group})
+	 form2 = leap_form()
+         if request.method == 'POST':
+	 	form2 = leap_form(request.POST)
+		if form2.is_valid():
+			form2.save(group,User)
+			form2 = leap_form()
+	 return render(request, 'group_detail.html', {'group': group, 'form2':form2})
 
 @login_required
 def create_group(request):

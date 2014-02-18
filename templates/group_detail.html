@@ -26,4 +26,11 @@
     {% csrf_token %}
     <input type="submit" value="Submit">
 </form>	
+<form action="" method="post">
+    <table>
+        {{ form2.as_table }}
+    </table>
+    {% csrf_token %}
+    <input type="submit" value="Post">
+</form>
 {% endblock %}

@@ -27,7 +27,7 @@ INSTALLED_APPS = (
     'locations',
     'user_profile',
     'teams',
-
+    'leaps',
 )
 
 MIDDLEWARE_CLASSES = (
