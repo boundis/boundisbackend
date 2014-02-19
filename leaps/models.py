@@ -9,6 +9,9 @@ class Leap(models.Model):
 	author = models.ForeignKey(User)
 	group = models.ForeignKey(Group)
 	created_at = models.DateTimeField(auto_now_add=True)
+	def __unicode__(self):
+          return self.message
+
 
 class leap_form(forms.Form):
 	message = forms.CharField(required=True)

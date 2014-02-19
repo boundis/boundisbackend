@@ -33,4 +33,11 @@
     {% csrf_token %}
     <input type="submit" value="Post">
 </form>
+<p>Heyyyy</p>
+{{ leap_list }}
+{% for leap in leap_list.objects.all %}
+<li>{{ leap.message }}</li>
+{% endfor %}
+
+
 {% endblock %}

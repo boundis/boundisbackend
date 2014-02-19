@@ -6,7 +6,7 @@ from user_profile import models
 from teams import models
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
-from leaps.models import leap_form
+from leaps.models import leap_form, Leap
 @login_required
 def listMembership(request):
 	if request.user.is_authenticated():
@@ -35,6 +35,8 @@ def isOwner(person_obj,group_obj):
 @login_required
 def group_detail(request, group_id): 
     group = models.Group.objects.get(pk=group_id)
+    sel_group = group
+    leap_list = Leap.objects.get(group=sel_group)
     User = request.user
     persons = models.Person.objects.get(user=User.id)
     memlist = listMembershipList(User)
@@ -47,16 +49,20 @@ def group_detail(request, group_id):
         form = models.add_member_form()
 	form2 = leap_form()
 	if request.method == 'POST':
-            form = models.add_member_form(request.POST)
-	    form2 = leap_form(request.POST)
+            form = models.add_member_form(request.POST,prefix='addMember')
             if form.is_valid():
 			    form.save(group)
-			    form = models.add_member_form()
-	    else:
-                form = models.add_member_form()
-            return render(request, 'group_detail.html', {'group': group,'form':form,'form2':form2})
-        else:	
-             return render(request, 'group_detail.html', {'group': group,'form':form})			
+        else:
+	     form = models.add_member_form(prefix='addMember')
+
+	if request.method == 'POST' and not form.is_valid():
+	     form2 = leap_form(request.POST, prefix ='postMessage')
+	     form = models.add_member_form(prefix='addMember')
+	     if form2.is_valid():
+		form2.save(group,User)
+             else:
+	     	form2=leap_form(prefix='postMessage')
+        return render(request, 'group_detail.html', {'group': group,'leap_list':leap_list,'form':form,'form2':form2})			
     else:
          print "NOT AUTH"
 	 form2 = leap_form()
