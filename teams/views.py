@@ -51,7 +51,14 @@ def group_detail(request, group_id):
 	if request.method == 'POST':
             form = models.add_member_form(request.POST,prefix='addMember')
             if form.is_valid():
-		form.save(group)
+		data = form.save(group)
+		try:
+			new_leap = Leap(message='[SYSTEM GENERATED MESSAGE] Adding: ' + data.person.user.first_name  + ' as '+form.cleaned_data['membership_type']+'.',author=User,group=group)
+                	new_leap.save()
+			return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+		except AttributeError:
+			return HttpResponse("User does not exist !, Please click the back button on your browser and try again.")
+
         else:
 	     form = models.add_member_form(prefix='addMember')
 
