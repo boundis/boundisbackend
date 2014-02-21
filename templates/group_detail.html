@@ -19,24 +19,22 @@
     </p>
 {% endif %}
 
-<form action="" method="post">
-    <table>
-        {{ form.as_table }}
-    </table>
+<form action="" method="POST">
+        {{ form.as_p }}
     {% csrf_token %}
     <input type="submit" value="Submit">
 </form>	
-<form action="" method="post">
-    <table>
-        {{ form2.as_table }}
-    </table>
+<form action="" method="POST">
+        {{ form2.as_p }}
     {% csrf_token %}
     <input type="submit" value="Post">
 </form>
-<p>Heyyyy</p>
-{{ leap_list }}
-{% for leap in leap_list.objects.all %}
-<li>{{ leap.message }}</li>
+<br>
+<br>
+{% for leap in leap_list %}
+<p>{{ leap }}
+<br><b>by {{ leap.author.first_name}} {{ leap.author.last_name }} on {{leap.created_at}}</b></p>
+<hr>
 {% endfor %}
 
 

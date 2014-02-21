@@ -36,7 +36,9 @@ def isOwner(person_obj,group_obj):
 def group_detail(request, group_id): 
     group = models.Group.objects.get(pk=group_id)
     sel_group = group
-    leap_list = Leap.objects.get(group=sel_group)
+    leap_list = Leap.objects.filter(group=group).order_by('-created_at')
+    for leap in leap_list:
+	print leap
     User = request.user
     persons = models.Person.objects.get(user=User.id)
     memlist = listMembershipList(User)
@@ -46,21 +48,22 @@ def group_detail(request, group_id):
 	auth = isOwner(persons,group)
     print auth
     if auth == True:
-        form = models.add_member_form()
-	form2 = leap_form()
 	if request.method == 'POST':
             form = models.add_member_form(request.POST,prefix='addMember')
             if form.is_valid():
-			    form.save(group)
+		form.save(group)
         else:
 	     form = models.add_member_form(prefix='addMember')
 
 	if request.method == 'POST' and not form.is_valid():
+	     print "tstt"
 	     form2 = leap_form(request.POST, prefix ='postMessage')
 	     form = models.add_member_form(prefix='addMember')
 	     if form2.is_valid():
+		print "tsttt2"
 		form2.save(group,User)
-             else:
+		return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        else:
 	     	form2=leap_form(prefix='postMessage')
         return render(request, 'group_detail.html', {'group': group,'leap_list':leap_list,'form':form,'form2':form2})			
     else:
@@ -71,7 +74,8 @@ def group_detail(request, group_id):
 		if form2.is_valid():
 			form2.save(group,User)
 			form2 = leap_form()
-	 return render(request, 'group_detail.html', {'group': group, 'form2':form2})
+			return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+	 return render(request, 'group_detail.html', {'group': group,'leap_list': leap_list, 'form2':form2})
 
 @login_required
 def create_group(request):

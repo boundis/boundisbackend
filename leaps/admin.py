@@ -1,3 +1,5 @@
 from django.contrib import admin
+from leaps.models import Leap
 
-# Register your models here.
+admin.site.register(Leap)
+

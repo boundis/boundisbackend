@@ -14,7 +14,7 @@ class Leap(models.Model):
 
 
 class leap_form(forms.Form):
-	message = forms.CharField(required=True)
+	message = forms.CharField(widget = forms.Textarea,required=True)
 	def save(self,group_obj,user_obj):
 		new_leap = Leap(message=self.cleaned_data['message'],author=user_obj,group=group_obj)
 		new_leap.save()
