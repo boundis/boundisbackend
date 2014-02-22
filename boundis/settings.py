@@ -28,6 +28,7 @@ INSTALLED_APPS = (
     'user_profile',
     'teams',
     'leaps',
+    'bugger',
 )
 
 MIDDLEWARE_CLASSES = (
