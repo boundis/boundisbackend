@@ -1,0 +1,12 @@
+{% block title %}<h1>Bugger</h1>{% endblock %}
+
+{% block content %}
+<h2>Bugs</h2>
+<table>
+<tr><th>Assigned To</th><th>Summary</th><th>Status</th><th>Priority</th></tr>
+{% for bug in bug_list %}
+    <tr><td>{{ bug.assigned_to }}</td><td><a href="/bugger/bug/{{bug.id}}">{{ bug.summary }}</a></td><td>{{ bug.status }}</td><td>{{ bug.priority }}</td></tr>
+{% endfor %}
+</table>
+{% endblock %}
+
