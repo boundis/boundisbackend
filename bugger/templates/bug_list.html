@@ -2,8 +2,8 @@
 
 {% block content %}
 <h2>Bugs</h2>
-<h3><a href="/bugger/create/">Create Bug</a></h3>
 <h3><a href="/bugger/assigned/me">Assigned To Me</a>
+<h3><a href="/bugger/create/">Create Bug</a></h3>
 <table width="100%" border="1">
 <tr><th>Assigned To</th><th>Summary</th><th>Status</th><th>Priority</th><th>Created By</th></tr>
 {% for bug in bug_list %}

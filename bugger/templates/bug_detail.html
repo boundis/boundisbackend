@@ -1,0 +1,36 @@
+{% block title %}<h1>Bugger</h1>{% endblock %}
+<h3><a href="/bugger/">All Bugs</a></h3>
+<h3><a href="/bugger/assigned/me">Assigned to Me</a></h3>
+<h3><a href="/bugger/bug/edit/{{bug.id}}">Edit Bug</a></h3>
+<h2>{{bug.summary}}</h2>
+
+{% block leftcolumn %}
+
+<br>
+<table cellpadding="10">
+<tr><td><u>Bug Number: </u></td><td>{{bug.id}}</td></tr>
+<tr><td><u>Description: </u></td><td>{{bug.bug_description}}</td></tr>
+<tr><td><u>Status: </u></td><td>{{bug.status}}</td></tr>
+<tr><td><u>Assigned To: </u></td><td>{{bug.assigned_to}}</td></tr>
+<tr><td><u>Priority: </u></td><td>{{bug.priority}}</td></tr>
+<tr><td><u>Created by: </u></td><td>{{bug.created_by}}</td></tr>
+<tr><td><u>Created on: </u></td><td>{{bug.created_on}}</td></tr>
+</table>
+<br>
+<h2>Comments</h2>
+<br>	
+<form action="" method="POST">
+        {{ form.as_p }}
+    {% csrf_token %}
+    <input type="submit" value="Comment">
+</form>
+<br>
+<br>
+{% for leap in leap_list %}
+<p>{{ leap }}
+<br><b>by {{ leap.author.first_name}} {{ leap.author.last_name }} on {{leap.created_at}}</b></p>
+<hr>
+{% endfor %}
+
+
+{% endblock %}
