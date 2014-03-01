@@ -1,11 +1,11 @@
-{% extends "base2.html" %}
+{% extends "base_2.html" %}
 
 {% block title %}Search results{% endblock %}
 
-{% block results %}
+{% block content %}
 {% if venue_list %}
         	{% for Venue in venue_list %}
-            <div class="col-sm-4">
+            <div class="col-md-4">
 
                 <div class="thumbnail" style="background-color:lightgrey; height: 100%">
 
@@ -24,6 +24,7 @@
                 </div>
             </div>
         {% endfor %}
+        <a href="/locations/add_venue/">Add Venue</a>
 {% else %}
 	<p>No venues matched your search criteria. <a href="/locations/">Try another search.</a></p>
 {% endif %}

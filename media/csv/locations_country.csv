@@ -1,0 +1,195 @@
+id,country,continent_id
+1,Afghanistan,3
+2,Albania,4
+3,Algeria,1
+4,Andorra,4
+5,Angola,1
+6,Antigua and Barbuda,5
+7,Argentina,7
+8,Armenia,4
+9,Australia,6
+10,Austria,4
+11,Azerbaijan,4
+12,Bahamas,5
+13,Bahrain,3
+14,Bangladesh,3
+15,Barbados,5
+16,Belarus,4
+17,Belgium,4
+18,Belize,5
+19,Benin,1
+20,Bhutan,3
+21,Bolivia,7
+22,Bosnia and Herzegovina,4
+23,Botswana,1
+24,Brazil,7
+25,Brunei,3
+26,Bulgaria,4
+27,Burkina,1
+28,Burma (Myanmar),3
+29,Burundi,1
+30,Cambodia,3
+31,Cameroon,1
+32,Canada,5
+33,Cape Verde,1
+34,Central African Republic,1
+35,Chad,1
+36,Chile,7
+37,China,3
+38,Colombia,7
+39,Comoros,1
+40,Congo,1
+41,"""Congo, Democratic Republic of""",1
+42,Costa Rica,5
+43,Croatia,4
+44,Cuba,5
+45,Cyprus,4
+46,Czech Republic,4
+47,Denmark,4
+48,Djibouti,1
+49,Dominica,5
+50,Dominican Republic,5
+51,East Timor,3
+52,Ecuador,7
+53,Egypt,1
+54,El Salvador,5
+55,Equatorial Guinea,1
+56,Eritrea,1
+57,Estonia,4
+58,Ethiopia,1
+59,Fiji,6
+60,Finland,4
+61,France,4
+62,Gabon,1
+63,Gambia,1
+64,Georgia,4
+65,Germany,4
+66,Ghana,1
+67,Greece,4
+68,Grenada,5
+69,Guatemala,5
+70,Guinea,1
+71,Guinea-Bissau,1
+72,Guyana,7
+73,Haiti,5
+74,Honduras,5
+75,Hungary,4
+76,Iceland,4
+77,India,3
+78,Indonesia,3
+79,Iran,3
+80,Iraq,3
+81,Ireland,4
+82,Israel,3
+83,Italy,4
+84,Ivory Coast,1
+85,Jamaica,5
+86,Japan,3
+87,Jordan,3
+88,Kazakhstan,3
+89,Kenya,1
+90,Kiribati,6
+91,"""Korea, North""",3
+92,"""Korea, South""",3
+93,Kuwait,3
+94,Kyrgyzstan,3
+95,Laos,3
+96,Latvia,4
+97,Lebanon,3
+98,Lesotho,1
+99,Liberia,1
+100,Libya,1
+101,Liechtenstein,4
+102,Lithuania,4
+103,Luxembourg,4
+104,Macedonia,4
+105,Madagascar,1
+106,Malawi,1
+107,Malaysia,3
+108,Maldives,3
+109,Mali,1
+110,Malta,4
+111,Marshall Islands,6
+112,Mauritania,1
+113,Mauritius,1
+114,Mexico,5
+115,Micronesia,6
+116,Moldova,4
+117,Monaco,4
+118,Mongolia,3
+119,Montenegro,4
+120,Morocco,1
+121,Mozambique,1
+122,Namibia,1
+123,Nauru,6
+124,Nepal,3
+125,Netherlands,4
+126,New Zealand,6
+127,Nicaragua,5
+128,Niger,1
+129,Nigeria,1
+130,Norway,4
+131,Oman,3
+132,Pakistan,3
+133,Palau,6
+134,Panama,5
+135,Papua New Guinea,6
+136,Paraguay,7
+137,Peru,7
+138,Philippines,3
+139,Poland,4
+140,Portugal,4
+141,Qatar,3
+142,Romania,4
+143,Russian Federation,3
+144,Rwanda,1
+145,Saint Kitts and Nevis,5
+146,Saint Lucia,5
+147,Saint Vincent and the Grenadines,5
+148,Samoa,6
+149,San Marino,4
+150,Sao Tome and Principe,1
+151,Saudi Arabia,3
+152,Senegal,1
+153,Serbia,4
+154,Seychelles,1
+155,Sierra Leone,1
+156,Singapore,3
+157,Slovakia,4
+158,Slovenia,4
+159,Solomon Islands,6
+160,Somalia,1
+161,South Africa,1
+162,South Sudan,1
+163,Spain,4
+164,Sri Lanka,3
+165,Sudan,1
+166,Suriname,7
+167,Swaziland,1
+168,Sweden,4
+169,Switzerland,4
+170,Syria,3
+171,Tajikistan,3
+172,Tanzania,1
+173,Thailand,3
+174,Togo,1
+175,Tonga,6
+176,Trinidad and Tobago,5
+177,Tunisia,1
+178,Turkey,3
+179,Turkmenistan,3
+180,Tuvalu,6
+181,Uganda,1
+182,Ukraine,4
+183,United Arab Emirates,3
+184,United Kingdom,4
+185,United States,5
+186,Uruguay,7
+187,Uzbekistan,3
+188,Vanuatu,6
+189,Vatican City,4
+190,Venezuela,7
+191,Vietnam,3
+192,Yemen,3
+193,Zambia,1
+194,Zimbabwe,1

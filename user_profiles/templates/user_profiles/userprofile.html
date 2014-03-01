@@ -1,0 +1,33 @@
+{% extends "base_3.html" %}
+    
+{% block title %}
+    {% if request.user.is_authenticated %}Logged In{% else %}Not Logged In{% endif %}
+{% endblock %}
+
+
+ 
+{% if request.user.is_authenticated %}
+{% block leftcolumn %}
+    <img src="{{ profile.profile_image_url }}"/>
+{% endblock %}
+{% block content %}
+    {% if profile.user.first_name or profile.user.last_name %}
+        <h3>{{ profile.user.first_name|capfirst }} {{ profile.user.last_name|capfirst }}</h3>    
+    {% else %}
+        <h3>{{ profile.user.username }}</h3>
+    {% endif %} 
+<h4>Age</h4><p>{{ age }} years </p>
+<h4>Gender</h4><p>{{ profile.gender|capfirst}}</p>
+
+<h4>My Sports</h4><p>{% for sport in profile.user.my_sports.all %}
+    {{ sport }}
+{% endfor %}</p>
+
+
+<h4>My Memberships</h4>
+{% for membership in membership_list %}
+    <p><a href="/teams/group/{{membership.group.id}}">{{ membership.group.group_name }}</a> <b>joined on {{ membership.date_joined }}</b> as {{ membership.membership_type }}</P>
+{% endfor %}
+<a href="/teams/group/create/">Add a Group</a>
+{% endblock %}
+{% endif %}

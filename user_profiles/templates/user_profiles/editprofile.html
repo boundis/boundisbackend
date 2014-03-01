@@ -1,0 +1,36 @@
+{% extends "base_2.html" %}
+{% load bootstrap %}
+
+{% block title %}Edit Profile{% endblock %}
+{% block link %}
+{{form.media}}
+
+{% endblock %}
+
+{% block content %}
+<div class="col-md-6">
+	<h2>Edit My Profile</h2>
+
+{% if form.errors or form1.non_field_errors%}
+<h4>Pease correct the errors below and try again</h4>
+</div>
+    <div class="alert alert-danger alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        {% for field in form1 %} 
+            {% if field.errors %}
+            <li>{{ field.label }}: {{ field.errors|striptags }}</li>
+            {% endif %}
+        {% endfor %}
+        <p>{{ form1.non_field_errors }}</p>
+    </div>
+{% endif %}
+<form action="" method="post" enctype="multipart/form-data">
+        {{ form1|bootstrap}}
+        {{ form|bootstrap}}
+        
+    {% csrf_token %}
+    <input class="btn btn-large btn-primary" type="submit" value="Save Changes">
+</form>	
+</div>
+{% endblock %}
+

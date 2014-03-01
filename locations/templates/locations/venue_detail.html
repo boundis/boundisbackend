@@ -1,8 +1,8 @@
-{% extends "base1.html" %}
+{% extends "base_3.html" %}
 
 {% block title %}{{ Venue.name }}{% endblock %}
 
-{% block leftcolumn %}
+{% block content %}
 
         <h1>{{Venue.name}}</h1>
       	{% if pic_list|length > 0 %}
@@ -14,7 +14,7 @@
     	{% for Venuepic in pic_list %}
 			<a href="/media/{{Venuepic.image}}" data-lightbox="roadtrip"><img class="img-thumbnail" src="/media/{{Venuepic.image}}" style="max-width:100px; max-height:100px;min-width:50px; min-height:50px;"></a>
 		{% endfor %}
-    <a href="add_v_photos/{{Venue.id}}">Add photos</a>
+    <a href="/locations/add_v_photos/{{Venue.id}}">Add photos</a>
 
         <h3>About {{Venue.name}}</h3>
         {% if Venue.summary %}
@@ -85,7 +85,7 @@
   {% endblock %}
 
 
-      {% block rightcolumn %}
+      {% block leftcolumn %}
         <div class="facilities-button">
           <button type="button" class="btn btn-default btn-lg">
             <span class="glyphicon glyphicon-plus"></span> Add to Favourites

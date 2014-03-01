@@ -21,4 +21,3 @@ class facilitypic_form(ModelForm):
 	class Meta:
 		model = models.Facilitypic
 		exclude = ['facility']
-

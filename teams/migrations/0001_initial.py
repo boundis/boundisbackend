@@ -19,7 +19,7 @@ class Migration(SchemaMigration):
         # Adding model 'Membership'
         db.create_table(u'teams_membership', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('person', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['user_profile.Person'])),
+            ('person', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
             ('membership_type', self.gf('django.db.models.fields.CharField')(max_length=20)),
             ('group', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['teams.Group'])),
             ('date_joined', self.gf('django.db.models.fields.DateField')(auto_now=True, blank=True)),
@@ -72,31 +72,12 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        u'sports.category': {
-            'Meta': {'object_name': 'Category'},
-            'category': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'}),
-            'description': ('django.db.models.fields.TextField', [], {'max_length': '70'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
-        },
-        u'sports.facility_type': {
-            'Meta': {'object_name': 'Facility_type'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '20'})
-        },
-        u'sports.sport': {
-            'Meta': {'object_name': 'Sport'},
-            'category': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['sports.Category']"}),
-            'commonly_played_on_a': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['sports.Facility_type']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
-        },
         u'teams.group': {
             'Meta': {'object_name': 'Group'},
             'group_name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'group_type': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'members': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['user_profile.Person']", 'through': u"orm['teams.Membership']", 'symmetrical': 'False'})
+            'members': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.User']", 'through': u"orm['teams.Membership']", 'symmetrical': 'False'})
         },
         u'teams.membership': {
             'Meta': {'object_name': 'Membership'},
@@ -104,15 +85,7 @@ class Migration(SchemaMigration):
             'group': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['teams.Group']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'membership_type': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
-            'person': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['user_profile.Person']"})
-        },
-        u'user_profile.person': {
-            'Meta': {'object_name': 'Person'},
-            'dob': ('django.db.models.fields.DateField', [], {}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'sex': ('django.db.models.fields.CharField', [], {'max_length': '8'}),
-            'sport_intention': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['sports.Sport']", 'symmetrical': 'False'}),
-            'user': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['auth.User']", 'unique': 'True'})
+            'person': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"})
         }
     }
 

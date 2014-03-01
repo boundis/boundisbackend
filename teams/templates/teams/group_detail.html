@@ -1,16 +1,16 @@
-{% extends "base.html" %}
+{% extends "base_2.html" %}
+{% load bootstrap %}
 
 {% block title %}{{group.group_name}}{% endblock %}
 
 {% block content %}
-<br>
-<table cellpadding="10">
-<tr><td><u>Name: </u></td><td>{{group.group_name}}</td></tr>
-<tr><td><u>Type: </u></td><td>{{group.group_type}}</td></tr>
+<div class="col-md-6">
+<h4>Name: </h4><p>{{group.group_name}}</p>
+<h4>Type: </h4><p>{{group.group_type|capfirst}}</p>
 </table>
-<p>Current Members: </p>
+<h4>Current Members: </h4>
 {% for member in group.members.all %}
-{{ member.user.username }}, 
+<p><img src="{{ member.profile.profile_image_sm_url }}"/><a href="/profile/{{ member.id}}"> {{ member.username}}</a></p>
 {% endfor %}
 {% if form.errors %}
     <p style="color: red;">
@@ -18,11 +18,26 @@
     </p>
 {% endif %}
 
-<form action="" method="post">
-    <table>
-        {{ form.as_table }}
-    </table>
-    {% csrf_token %}
-    <input type="submit" value="Submit">
+{% if form %}
+<form class="form-inline" action="" method="post">{% csrf_token %}
+
+        {{ form|bootstrap }}
+<button type="submit" class="btn btn-primary">Add User</button>
 </form>	
+{% endif %}
+<h2>Leap Messaging</h2>
+<br>	
+<form action="" method="POST">
+        {{ form2.as_p }}
+    {% csrf_token %}
+    <input type="submit" value="Post">
+</form>
+<br>
+<br>
+{% for leap in leap_list %}
+<p>{{ leap }}
+<br><b>by {{ leap.author.first_name}} {{ leap.author.last_name }} on {{leap.created_at}}</b></p>
+<hr>
+{% endfor %}
+</div>
 {% endblock %}

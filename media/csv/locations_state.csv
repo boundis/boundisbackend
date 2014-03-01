@@ -1,0 +1,77 @@
+id,state,abbreviation,country_id
+1,Alabama,AL,185
+2,Alaska,AK,185
+3,Arizona,AZ,185
+4,Arkansas,AR,185
+5,California,CA,185
+6,Colorado,CO,185
+7,Connecticut,CT,185
+8,Delaware,DE,185
+9,Florida,FL,185
+10,Georgia,GA,185
+11,Hawaii,HI,185
+12,Idaho,ID,185
+13,Illinois,IL,185
+14,Indiana,IN,185
+15,Iowa,IA,185
+16,Kansas,KS,185
+17,Kentucky,KY,185
+18,Louisiana,LA,185
+19,Maine,ME,185
+20,Maryland,MD,185
+21,Massachusetts,MA,185
+22,Michigan,MI,185
+23,Minnesota,MN,185
+24,Mississippi,MS,185
+25,Missouri,MO,185
+26,Montana,MT,185
+27,Nebraska,NE,185
+28,Nevada,NV,185
+29,New Hampshire,NH,185
+30,New Jersey,NJ,185
+31,New Mexico,NM,185
+32,New York,NY,185
+33,North Carolina,NC,185
+34,North Dakota,ND,185
+35,Ohio,OH,185
+36,Oklahoma,OK,185
+37,Oregon,OR,185
+38,Pennsylvania,PA,185
+39,Rhode Island,RI,185
+40,South Carolina,SC,185
+41,South Dakota,SD,185
+42,Tennessee,TN,185
+43,Texas,TX,185
+44,Utah,UT,185
+45,Vermont,VT,185
+46,Virginia,VA,185
+47,Washington,WA,185
+48,West Virginia,WV,185
+49,Wisconsin,WI,185
+50,Wyoming,WY,185
+51,Puerto Rico,PR,185
+52,U.S. Virgin Islands,VI,185
+53,American Samoa,AS,185
+54,Guam,GU,185
+55,Northern Mariana Islands,MP,185
+56,Alberta,AB,32
+57,British Columbia,BC,32
+58,Manitoba,MB,32
+59,New Brunswick,NB,32
+60,Newfoundland and Labrador,NL,32
+61,Nova Scotia,NS,32
+62,Ontario,ON,32
+63,Prince Edward Island,PE,32
+64,Quebec,QC,32
+65,Saskatchewan,SK,32
+66,Northwest Territories,NT,32
+67,Nunavut,NU,32
+68,Yukon Territory,YT,32
+69,Australian Capital Territory,ACT,9
+70,New South Wales,NSW,9
+71,Northern Territory,NT,9
+72,Queensland,QLD,9
+73,South Australia,SA,9
+74,Tasmania,TAS,9
+75,Victoria,VIC,9
+76,Western Australia,WA,9

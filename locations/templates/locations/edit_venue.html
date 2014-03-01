@@ -1,8 +1,13 @@
-{% extends "base1.html" %}
+{% extends "base_3.html" %}
+{% load bootstrap %}
 
 {% block title %}Edit Venue{% endblock %}
 
-{% block leftcolumn %}
+{% block link %}
+{{form.media}}
+{% endblock %}
+
+{% block content %}
 <h2>Edit Venue</h2>
 
 {% if error %}
@@ -13,7 +18,7 @@
 
 <form action="" method="post" enctype="multipart/form-data">
     <table>
-        {{ form.as_table }}
+        {{ form|bootstrap }}
     </table>
     {% csrf_token %}
     <input class="btn btn-large btn-primary" type="submit" value="Save Changes">

@@ -47,12 +47,13 @@ class Migration(SchemaMigration):
             ('name', self.gf('django.db.models.fields.CharField')(max_length=60)),
             ('suburb', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['locations.Suburb'])),
             ('street_address', self.gf('django.db.models.fields.CharField')(max_length=60)),
-            ('phone_number', self.gf('django.db.models.fields.IntegerField')(blank=True)),
-            ('email', self.gf('django.db.models.fields.EmailField')(max_length=50, blank=True)),
+            ('phone_number', self.gf('django.db.models.fields.IntegerField')()),
+            ('email', self.gf('django.db.models.fields.EmailField')(max_length=50)),
             ('website', self.gf('django.db.models.fields.CharField')(max_length=150, null=True)),
             ('public_toilets', self.gf('django.db.models.fields.CharField')(max_length=3)),
             ('change_rooms', self.gf('django.db.models.fields.CharField')(max_length=3)),
             ('onsite_parking', self.gf('django.db.models.fields.CharField')(max_length=3)),
+            ('summary', self.gf('django.db.models.fields.TextField')(max_length=120)),
             ('monday_op', self.gf('django.db.models.fields.TimeField')(null=True, blank=True)),
             ('monday_cl', self.gf('django.db.models.fields.TimeField')(null=True, blank=True)),
             ('monday_is_closed', self.gf('django.db.models.fields.BooleanField')(default=False)),
@@ -92,7 +93,8 @@ class Migration(SchemaMigration):
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('venue', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['locations.Venue'])),
             ('sports', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['sports.Sport'])),
-            ('surface', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['sports.Surface'])),
+            ('facility_type', self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['sports.Facility_type'])),
+            ('surface', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['sports.Surface_type'])),
             ('number_of_these_facilities', self.gf('django.db.models.fields.IntegerField')()),
             ('members_only', self.gf('django.db.models.fields.CharField')(max_length=3)),
             ('payment_required', self.gf('django.db.models.fields.CharField')(max_length=3)),
@@ -103,6 +105,9 @@ class Migration(SchemaMigration):
             ('saved', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
         ))
         db.send_create_signal(u'locations', ['Facility'])
+
+        # Adding unique constraint on 'Facility', fields ['venue', 'sports']
+        db.create_unique(u'locations_facility', ['venue_id', 'sports_id'])
 
         # Adding model 'Facilitypic'
         db.create_table(u'locations_facilitypic', (
@@ -115,6 +120,9 @@ class Migration(SchemaMigration):
 
 
     def backwards(self, orm):
+        # Removing unique constraint on 'Facility', fields ['venue', 'sports']
+        db.delete_unique(u'locations_facility', ['venue_id', 'sports_id'])
+
         # Deleting model 'Continent'
         db.delete_table(u'locations_continent')
 
@@ -153,9 +161,10 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
         },
         u'locations.facility': {
-            'Meta': {'object_name': 'Facility'},
+            'Meta': {'unique_together': "(('venue', 'sports'),)", 'object_name': 'Facility'},
             'bookings_required': ('django.db.models.fields.CharField', [], {'max_length': '3'}),
             'cost': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '6', 'decimal_places': '2'}),
+            'facility_type': ('django.db.models.fields.related.ForeignKey', [], {'default': '1', 'to': u"orm['sports.Facility_type']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'indoor_or_outdoor': ('django.db.models.fields.CharField', [], {'max_length': '7'}),
             'lighting_at_night': ('django.db.models.fields.CharField', [], {'max_length': '3'}),
@@ -164,7 +173,7 @@ class Migration(SchemaMigration):
             'payment_required': ('django.db.models.fields.CharField', [], {'max_length': '3'}),
             'saved': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'sports': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['sports.Sport']"}),
-            'surface': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['sports.Surface']"}),
+            'surface': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['sports.Surface_type']"}),
             'venue': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['locations.Venue']"})
         },
         u'locations.facilitypic': {
@@ -191,7 +200,7 @@ class Migration(SchemaMigration):
         u'locations.venue': {
             'Meta': {'object_name': 'Venue'},
             'change_rooms': ('django.db.models.fields.CharField', [], {'max_length': '3'}),
-            'email': ('django.db.models.fields.EmailField', [], {'max_length': '50', 'blank': 'True'}),
+            'email': ('django.db.models.fields.EmailField', [], {'max_length': '50'}),
             'friday_cl': ('django.db.models.fields.TimeField', [], {'null': 'True', 'blank': 'True'}),
             'friday_is_closed': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'friday_op': ('django.db.models.fields.TimeField', [], {'null': 'True', 'blank': 'True'}),
@@ -201,7 +210,7 @@ class Migration(SchemaMigration):
             'monday_op': ('django.db.models.fields.TimeField', [], {'null': 'True', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '60'}),
             'onsite_parking': ('django.db.models.fields.CharField', [], {'max_length': '3'}),
-            'phone_number': ('django.db.models.fields.IntegerField', [], {'blank': 'True'}),
+            'phone_number': ('django.db.models.fields.IntegerField', [], {}),
             'public_toilets': ('django.db.models.fields.CharField', [], {'max_length': '3'}),
             'saturday_cl': ('django.db.models.fields.TimeField', [], {'null': 'True', 'blank': 'True'}),
             'saturday_is_closed': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
@@ -209,6 +218,7 @@ class Migration(SchemaMigration):
             'saved': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'street_address': ('django.db.models.fields.CharField', [], {'max_length': '60'}),
             'suburb': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['locations.Suburb']"}),
+            'summary': ('django.db.models.fields.TextField', [], {'max_length': '120'}),
             'sunday_cl': ('django.db.models.fields.TimeField', [], {'null': 'True', 'blank': 'True'}),
             'sunday_is_closed': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'sunday_op': ('django.db.models.fields.TimeField', [], {'null': 'True', 'blank': 'True'}),
@@ -249,8 +259,8 @@ class Migration(SchemaMigration):
             'image': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
         },
-        u'sports.surface': {
-            'Meta': {'object_name': 'Surface'},
+        u'sports.surface_type': {
+            'Meta': {'object_name': 'Surface_type'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'surface': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '20'})
         }

@@ -23,12 +23,12 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal(u'sports', ['Facility_type'])
 
-        # Adding model 'Surface'
-        db.create_table(u'sports_surface', (
+        # Adding model 'Surface_type'
+        db.create_table(u'sports_surface_type', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('surface', self.gf('django.db.models.fields.CharField')(unique=True, max_length=20)),
         ))
-        db.send_create_signal(u'sports', ['Surface'])
+        db.send_create_signal(u'sports', ['Surface_type'])
 
         # Adding model 'Sport'
         db.create_table(u'sports_sport', (
@@ -48,8 +48,8 @@ class Migration(SchemaMigration):
         # Deleting model 'Facility_type'
         db.delete_table(u'sports_facility_type')
 
-        # Deleting model 'Surface'
-        db.delete_table(u'sports_surface')
+        # Deleting model 'Surface_type'
+        db.delete_table(u'sports_surface_type')
 
         # Deleting model 'Sport'
         db.delete_table(u'sports_sport')
@@ -75,8 +75,8 @@ class Migration(SchemaMigration):
             'image': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
         },
-        u'sports.surface': {
-            'Meta': {'object_name': 'Surface'},
+        u'sports.surface_type': {
+            'Meta': {'object_name': 'Surface_type'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'surface': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '20'})
         }

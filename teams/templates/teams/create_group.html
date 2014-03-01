@@ -1,8 +1,14 @@
-{% extends "base.html" %}
+{% extends "base_2.html" %}
+{% load bootstrap %}
 
 {% block title %}Create Group{% endblock %}
 
 {% block content %}
+<div class="col-md-6"
+<h2>My Memberships</h2>
+{% for membership in membership_list %}
+    <p><a href="/teams/group/{{membership.group.id}}">{{ membership.group.group_name }}</a> <b>joined on {{ membership.date_joined }}</b> as {{ membership.membership_type }}</P>
+{% endfor %}
 <h2>Create Group</h2>
 
 {% if form.errors %}
@@ -13,9 +19,11 @@
 
 <form action="" method="post">
     <table>
-        {{ form.as_table }}
+        {{ form|bootstrap }}
     </table>
     {% csrf_token %}
-    <input type="submit" value="Submit">
+    <button type="submit" class="btn btn-primary">Create Group</button>
 </form>	
+<a href="/profile/myprofile">Profile</a>
+</div>
 {% endblock %}

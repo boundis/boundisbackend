@@ -1,7 +1,32 @@
-body {
+.topspace {
   padding-top: 50px;
+}
+
+.centre {
+  text-align: center;
+}
+.row {
+  padding-top: 30px;
 }
 .starter-template {
   padding: 40px 15px;
   text-align: center;
+}
+
+footer {
+		text-align: center;
+		padding-top:100px;
+	
+}
+
+.rightcol {
+  border-left: lightgrey solid 1px;
+}
+
+
+.navbar {
+  position: relative;
+  min-height: 50px;
+  margin-bottom: 0px;
+  border: 1px solid transparent;
 }

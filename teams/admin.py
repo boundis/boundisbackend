@@ -1,6 +1,5 @@
 from django.contrib import admin
-from teams.models import Person,Membership,Group
+from teams.models import UserProfile,Membership,Group
 
-admin.site.register(Person)
 admin.site.register(Group)
 admin.site.register(Membership)

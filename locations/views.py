@@ -145,6 +145,49 @@ def search(request):
     else:
         return render(request, 'locations/search.html', {'error': error})
 
+
+def home(request):
+    error = False
+    if 'suburb' in request.GET:
+        suburb = request.GET['suburb']
+        sport = request.GET['sport']
+        if not suburb:
+            error = True
+            return render(request, 'home.html', {'error': error})
+        else:
+            try:
+                suburb = int(suburb)
+            except:
+                ValueError
+                suburb= suburb.upper()
+                try:
+                    suburb=models.Suburb.objects.get(suburb=suburb)
+                    post_code = suburb.post_code
+                except:
+                    ValueError
+                    locations = []
+                    return render(request, 'locations/search_results.html',{'query':suburb, 'locations':locations} )
+            if 'surrounding' in request.GET:
+                a=post_code-15
+                b=post_code+15
+            else:
+                a=post_code
+                b=post_code
+            queryset = models.Venue.objects.filter(Q(facility__sports__name__icontains=sport), Q(suburb__post_code__range=(a, b)))
+            venue_list = queryset.order_by('name').distinct()
+            venue_piclist = []
+            facility_list = []
+            for Venue in venue_list:
+                venue_piclist.extend(list(models.Venuepic.objects.filter(venue=Venue.id)))
+                facility_list.extend(list(models.Facility.objects.filter(venue=Venue.id)))
+            return render(request, 'locations/search_results.html',{'query':suburb, 'venue_list': venue_list, 'facility_list' : facility_list, 'venue_piclist':venue_piclist,} )
+    else:
+        return render(request, 'home.html', {'error': error})
+
+
+
+
+
 def add_venuepic(request, venue_id):
     venue = models.Venue.objects.get(pk=venue_id)
     form = forms.venuepic_form()

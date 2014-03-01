@@ -1,19 +1,28 @@
-{% extends "base1.html" %}
+{% extends "base_3.html" %}
 
 {% block title %}Find a venue{% endblock %}
 
-{% block leftcolumn %}
+{% block content %}
     {% if error %}
         <p style="color: red;">Please provide a suburb or postcode.</p>
     {% endif %}
 <h3>Find sports in your area</h3>
 {% csrf_token %}
 <div class="marketing">
-<form action="" method="get">
-    <input class="span2" type="text" name='sport' placeholder='Sport'>
-    <input class="span3" type="text" name='suburb' placeholder='Suburb or postcode'>
-    <label><input type="checkbox" name='surrounding'> Include surrounding suburbs</label>
+<form role="form" action="" method="get">
+    <div class="form-group">
+    <input class="form-control" type="text" name='sport' placeholder='Sport'>
+	</div>
+	<div class="form-group">
+    <input class=" form-control" type="text" name='suburb' placeholder='Suburb or postcode'>
+	</div>
+  	<div class="checkbox">
+    	<label>
+      		<input type="checkbox" name='surrounding'> Include surrounding suburbs
+    	</label>
+  	</div>
     <input class="btn btn-medium btn-primary span5" type="submit" value="Get Bounding!">
 </form>	
 </div>
 {% endblock %}
+
