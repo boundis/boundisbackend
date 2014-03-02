@@ -8,17 +8,10 @@
 
 {% block content %}
 <div class="centre">
-<h4>Log in above</h4>
-  <div><a class="forgot" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a></div>
-<h3>or</h3>
-<a href="/accounts/facebook/login/"><img src="/media/site_images/active_600.png"/></a>
-    <div class="inset">
-{% if form.errors or form.non_field_errors%}
-<h4>Pease correct the errors below and try again</h4>
-</div>
-  {% csrf_token %}
+  {% if form.errors or form.non_field_errors%}
     <div class="alert alert-danger alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h4>Pease correct the errors below and try again</h4>
         {% for field in form %} 
             {% if field.errors %}
             <li>{{ field.label }}: {{ field.errors|striptags }}</li>
@@ -27,6 +20,12 @@
         <p>{{ form.non_field_errors }}</p>
     </div>
 {% endif %}
+<h4>Log in above</h4>
+  <div><a class="forgot" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a></div>
+<h3>or</h3>
+<a href="/accounts/facebook/login/"><img src="/media/site_images/active_600.png"/></a>
+
+
 <p></p>
           <div class="footnote">
             Don't have an account? <a href="{% url 'account_signup' %}">Sign Up Now</a>

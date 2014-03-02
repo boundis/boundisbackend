@@ -36,7 +36,7 @@
 <br>
 {% for leap in leap_list %}
 <p>{{ leap }}
-<br><b>by {{ leap.author.first_name}} {{ leap.author.last_name }} on {{leap.created_at}}</b></p>
+<br><b>by <a href="/profile/{{ leap.author.id}}"> {{ leap.author.username}}</a> on {{leap.created_at}}</b></p>
 <hr>
 {% endfor %}
 </div>
