@@ -42,7 +42,6 @@ INSTALLED_APPS = (
     'sports',
     'user_profiles',
     'teams',
-    'bugger',
     'leaps',
 
 
