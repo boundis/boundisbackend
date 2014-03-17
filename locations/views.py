@@ -140,9 +140,10 @@ def search(request):
             venue_piclist = []
             facility_list = []
             for Venue in venue_list:
-                venue_piclist.extend(list(models.Venuepic.objects.filter(venue=Venue.id)))
+                venue_piclist.extend(models.Venuepic.objects.filter(venue=Venue.id)[:1])
 		facility_list.extend(list(models.Facility.objects.filter(venue=Venue.id)))
-            return render(request, 'locations/search_results.html',{'query':suburb, 'venue_list': venue_list, 'facility_list' : facility_list, 'venue_piclist':venue_piclist,} )
+	    combined = zip(venue_list,venue_piclist)
+            return render(request, 'locations/search_results.html',{'query':suburb, 'venue_list': venue_list, 'combined':combined, 'facility_list' : facility_list, 'venue_piclist':venue_piclist,} )
     else:
         return render(request, 'locations/search.html', {'error': error})
 
