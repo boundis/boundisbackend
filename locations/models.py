@@ -94,6 +94,8 @@ class Venuepic(models.Model):
 	image = models.ImageField(upload_to=venue_upload_path)
 	saved = models.DateTimeField(auto_now_add=True)
 	#uploaded_by = models.ForeignKey(User)
+	def __unicode__(self):
+		return self.image
 
 class Facility(models.Model):
 	venue = models.ForeignKey(Venue)
