@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from leaps.models import  Leap
 from leaps.forms import leap_form
+from teams.forms import group_form, add_member_form
 
 @login_required
 def listMembership(request):
@@ -45,16 +46,16 @@ def group_detail(request, group_id):
     else:
         auth = isOwner(User,group)
         if auth:
-            form = models.add_member_form(prefix='addMember')
+            form = add_member_form(prefix='addMember')
             if request.method == 'POST':
-                form = models.add_member_form(request.POST, prefix='addMember' )
+                form = add_member_form(request.POST, prefix='addMember' )
                 if form.is_valid():
                     new_member = form.save(group)
                     print new_member
                 else:	
                     print "tstt"
                     form2 = leap_form(request.POST, prefix ='postMessage')
-                    form = models.add_member_form(prefix='addMember')
+                    form = add_member_form(prefix='addMember')
                     if form2.is_valid():
                         print "tsttt2"
                         form2.save(group,User)
@@ -77,14 +78,14 @@ def group_detail(request, group_id):
 @login_required
 def create_group(request):
     User=request.user
-    form = models.group_form()
+    form = group_form()
     if request.user.is_authenticated():
         membership_list = models.Membership.objects.filter(person=User)
     if request.method == 'POST':
-        form = models.group_form(request.POST)
+        form = group_form(request.POST)
         if form.is_valid():
             group=form.save(User)
             return HttpResponseRedirect('/teams/group/create')
         else:
-            form = models.group_form()
+            form = group_form()
     return render(request, 'teams/create_group.html', {'form': form, 'membership_list': membership_list })
